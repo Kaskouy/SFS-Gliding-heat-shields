@@ -10,13 +10,13 @@ using HarmonyLib;
 
 namespace GlidingHeatShields
 {
-    public class Main : SFSMod
+    public class Main : Mod
     {
         const string C_STR_MOD_ID = "GLIDING_HEAT_SHIELDS";
         const string C_STR_MOD_NAME = "Gliding Heat Shields";
         const string C_STR_AUTHOR = "Altaïr";
-        const string C_STR_MODLOADER_VERSION = "v1.2.0";
-        const string C_STR_MOD_VERSION = "V1.0";
+        const string C_STR_MODLOADER_VERSION = "0.5.7";
+        const string C_STR_MOD_VERSION = "V1.1";
         const string C_STR_MOD_DESCRIPTION = "This mod adds some gliding capabilities to heat shields, giving the player some control over his reentry trajectory.";
 
 
@@ -28,12 +28,12 @@ namespace GlidingHeatShields
         // This initializes the patcher. This is required if you use any Harmony patches
         public static Harmony patcher;
 
-        public override void load()
+        public override void Load()
         {
             // Tells the loader what to run when your mod is loaded
         }
 
-        public override void early_load()
+        public override void Early_Load()
         {
             // This method run s before anything from the game is loaded. This is where you should apply your patches, as shown below.
 
@@ -46,7 +46,7 @@ namespace GlidingHeatShields
             //base.early_load();
         }
 
-        public override void unload()
+        public override void Unload()
         {
             // This method runs if your mod gets unloaded. This shouldn't happen, so it throws an error.
             throw new NotImplementedException();
