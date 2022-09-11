@@ -15,12 +15,24 @@ namespace GlidingHeatShields
         const string C_STR_MOD_ID = "GLIDING_HEAT_SHIELDS";
         const string C_STR_MOD_NAME = "Gliding Heat Shields";
         const string C_STR_AUTHOR = "Altaïr";
-        const string C_STR_MODLOADER_VERSION = "0.5.7";
-        const string C_STR_MOD_VERSION = "V1.1";
+        const string C_STR_MODLOADER_VERSION = "1.5.7";
+        const string C_STR_MOD_VERSION = "V1.2";
         const string C_STR_MOD_DESCRIPTION = "This mod adds some gliding capabilities to heat shields, giving the player some control over his reentry trajectory.";
 
+        public override string ModNameID => C_STR_MOD_ID;
 
-        public Main() : base(C_STR_MOD_ID, C_STR_MOD_NAME, C_STR_AUTHOR, C_STR_MODLOADER_VERSION, C_STR_MOD_VERSION, C_STR_MOD_DESCRIPTION)
+        public override string DisplayName => C_STR_MOD_NAME;
+
+        public override string Author => C_STR_AUTHOR;
+
+        public override string MinimumGameVersionNecessary => C_STR_MODLOADER_VERSION;
+
+        public override string ModVersion => C_STR_MOD_VERSION;
+
+        public override string Description => C_STR_MOD_DESCRIPTION;
+
+
+        public Main() : base()
         {
 
         }
@@ -44,12 +56,6 @@ namespace GlidingHeatShields
             Main.patcher.PatchAll();
             
             //base.early_load();
-        }
-
-        public override void Unload()
-        {
-            // This method runs if your mod gets unloaded. This shouldn't happen, so it throws an error.
-            throw new NotImplementedException();
         }
     }
 }
