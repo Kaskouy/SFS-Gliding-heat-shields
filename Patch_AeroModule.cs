@@ -18,25 +18,32 @@ namespace TestModSFS
 		// This method is called right after AeroModule.ApplyForce() - That method calculates and applies drag and heat effects
 		static void Postfix(AeroModule __instance, List<Surface> exposedSurfaces, Location location, Matrix2x2 localToWorld)
         {
-			(float lift, Vector2 centerOfLift) tuple2 = CalculateLiftForce(exposedSurfaces);
-
-			float Pdyn = (float)location.planet.GetAtmosphericDensity(location.Height) * (float)location.velocity.sqrMagnitude * 1.5f;
-			
-			float liftForce = tuple2.lift * Pdyn;
-			Vector2 centerOfLift_World = localToWorld * tuple2.centerOfLift;
-
-			if (__instance is Aero_Rocket aero_Rocket)
+			try
 			{
-				centerOfLift_World = Vector2.Lerp(aero_Rocket.rocket.rb2d.worldCenterOfMass, centerOfLift_World, 0.2f);
+				(float lift, Vector2 centerOfLift) tuple2 = CalculateLiftForce(exposedSurfaces);
 
-				if (!float.IsNaN(liftForce))
+				float Pdyn = (float)location.planet.GetAtmosphericDensity(location.Height) * (float)location.velocity.sqrMagnitude * 1.5f;
+
+				float liftForce = tuple2.lift * Pdyn;
+				Vector2 centerOfLift_World = localToWorld * tuple2.centerOfLift;
+
+				if (__instance is Aero_Rocket aero_Rocket)
 				{
-					Vector2 liftAxis = -location.velocity.ToVector2.normalized;
-					liftAxis = liftAxis.Rotate_90();
-					aero_Rocket.rocket.rb2d.AddForceAtPosition(liftAxis * liftForce, centerOfLift_World, ForceMode2D.Force);
+					centerOfLift_World = Vector2.Lerp(aero_Rocket.rocket.rb2d.worldCenterOfMass, centerOfLift_World, 0.2f);
+
+					if (!float.IsNaN(liftForce))
+					{
+						Vector2 liftAxis = -location.velocity.ToVector2.normalized;
+						liftAxis = liftAxis.Rotate_90();
+						aero_Rocket.rocket.rb2d.AddForceAtPosition(liftAxis * liftForce, centerOfLift_World, ForceMode2D.Force);
+					}
 				}
 			}
-
+			catch(Exception ex)
+            {
+				// Avoids breaking the game if something goes wrong...
+				//FileLog.Log("EXCEPTION: " + ex.ToString());
+            }
 			
 		}
 

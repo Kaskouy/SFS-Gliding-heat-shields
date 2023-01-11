@@ -15,8 +15,8 @@ namespace GlidingHeatShields
         const string C_STR_MOD_ID = "GLIDING_HEAT_SHIELDS";
         const string C_STR_MOD_NAME = "Gliding Heat Shields";
         const string C_STR_AUTHOR = "Altaïr";
-        const string C_STR_MODLOADER_VERSION = "1.5.7";
-        const string C_STR_MOD_VERSION = "V1.2";
+        const string C_STR_MODLOADER_VERSION = "1.5.9.8";
+        const string C_STR_MOD_VERSION = "V1.2.1";
         const string C_STR_MOD_DESCRIPTION = "This mod adds some gliding capabilities to heat shields, giving the player some control over his reentry trajectory.";
 
         public override string ModNameID => C_STR_MOD_ID;
@@ -34,7 +34,8 @@ namespace GlidingHeatShields
 
         public Main() : base()
         {
-
+            Harmony.DEBUG = false;
+            //FileLog.logPath = "C:\\Users\\JB\\Desktop\\Jeux\\SFS PC\\Gliding heat shields\\Logs_GlidingHeatShields.txt";
         }
 
         // This initializes the patcher. This is required if you use any Harmony patches
